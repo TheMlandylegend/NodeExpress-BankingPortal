@@ -11,10 +11,6 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:true}));
    
-// app.post('/', function (req, res) {
-//     console.log(req.body);
-//     res.end();
-// });
 
 const accountData = fs.readFileSync(path.join(__dirname, 'json', 'accounts.json'), 'utf8');
 const accounts = JSON.parse(accountData);
@@ -27,6 +23,9 @@ app.get('/', (req, res) => res.render('index', { title: 'Account Summary', accou
 app.get('/savings', (req, res) => res.render('account', { account: accounts.savings }));
 app.get('/checking', (req, res) => res.render('account', { account: accounts.checking }));
 app.get('/credit', (req, res) => res.render('account', { account: accounts.credit }));
+
+app.get('/transfer', (req, res) =>
+    res.render('transfer'));
 
 app.get('/profile', (req, res) =>  res.render('profile', { user: users[0] }));
 
